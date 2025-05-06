@@ -79,7 +79,7 @@
                and taste preferences. Whether you're looking to lose weight, gain energy, or simply eat healthier,
                we've got the perfect plate waiting for you — powered by data, designed for you.
             </p>
-            <a href="connexion.html" class="btn btn--full margin-right-sm"
+            <a href="connexion.php" class="btn btn--full margin-right-sm"
               >Start eating well</a
             >
 
