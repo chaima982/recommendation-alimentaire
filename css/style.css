@@ -6,7 +6,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #fdf2e9;
+  background-color: #e4f1fd;
 
   /* Because we want header to be sticky later */
   height: 9.6rem;
@@ -15,7 +15,10 @@
 }
 
 .logo {
-  height: 2.2rem;
+
+  width:45%;
+
+
 }
 
 /**************************/
@@ -41,7 +44,7 @@
 
 .main-nav-link:hover,
 .main-nav-link:active {
-  color: #cf711f;
+  color: #11854b;
 }
 
 .main-nav-link.nav-cta:link,
@@ -49,12 +52,12 @@
   padding: 1.2rem 2.4rem;
   border-radius: 9px;
   color: #fff;
-  background-color: #e67e22;
+  background-color: #11854b;
 }
 
 .main-nav-link.nav-cta:hover,
 .main-nav-link.nav-cta:active {
-  background-color: #cf711f;
+  background-color:#11854b;
 }
 
 /* MOBILE */
@@ -99,7 +102,7 @@
 /**************************/
 
 .section-hero {
-  background-color: #fdf2e9;
+  background-color: #e4f1fd;
   padding: 4.8rem 0 9.6rem 0;
 }
 
@@ -152,7 +155,7 @@
 }
 
 .delivered-text span {
-  color: #cf711f;
+  color:#11854b;
   font-weight: 700;
 }
 
@@ -338,9 +341,9 @@
 /**************************/
 
 .section-testimonials {
-  background-color: #fdf2e9;
+  background-color: #e4f1fd;
   display: grid;
-  grid-template-columns: 55fr 45fr;
+  grid-template-columns: 45fr 45fr;
   align-items: center;
 }
 
@@ -350,7 +353,7 @@
 
 .testimonials {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns:  1fr;
   row-gap: 4.8rem;
   column-gap: 8rem;
 }
@@ -362,15 +365,12 @@
 }
 
 .testimonial-text {
-  font-size: 1.8rem;
-  line-height: 1.8;
+  font-size: 24px ;
   margin-bottom: 1.6rem;
+ 
 }
 
-.testimonial-name {
-  font-size: 1.6rem;
-  color: #6f6f6f;
-}
+
 
 .gallery {
   display: grid;
@@ -521,13 +521,13 @@
   box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.15);
   border-radius: 11px;
 
-  background-image: linear-gradient(to right bottom, #eb984e, #e67e22);
+  background-image: linear-gradient(to right bottom, #b5d6c6, #11854b);
   overflow: hidden;
 }
 
 .cta-text-box {
   padding: 4.8rem 6.4rem 6.4rem 6.4rem;
-  color: #45260a;
+  color: #14120f;
 }
 
 .cta .heading-secondary {
@@ -595,7 +595,8 @@
 
 .footer {
   padding: 12.8rem 0;
-  border-top: 1px solid #eee;
+  border-top: 1px solid #020202;
+  background-color: #e4f1fd;
 }
 
 .grid--footer {
@@ -610,6 +611,7 @@
 .footer-logo {
   display: block;
   margin-bottom: 3.2rem;
+width:350px
 }
 
 .social-links {

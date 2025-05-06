@@ -1,0 +1,31 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background: #f8f9fa;
+}
+
+/* Image section */
+.bg-image {
+    background: url('./img/gallery/gallery-11.jpg') center/cover no-repeat;
+}
+
+/* Form section */
+.register-box {
+    width: 100%;
+    height: 100%z;
+  
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+}
+
+/* Social login buttons */
+.btn-primary {
+    background-color: #3b5998;
+    border: none;
+}
+
+.btn-danger {
+    background-color: #db4437;
+    border: none;
+}
