@@ -38,7 +38,7 @@
     ></script>
     <script defer src="js/script.js"></script>
 
-    <title> &mdash; Never cook again!</title>
+    <title> &mdash; HealthyBite!</title>
 </head>
 <body>
       <header class="header">
@@ -48,14 +48,15 @@
 
       <nav class="main-nav">
         <ul class="main-nav-list">
-          <li><a class="main-nav-link" href="imc.php">IMC</a></li>
-          <li><a class="main-nav-link" href="meals.php">Meals</a></li>
-          <li>
-            <a class="main-nav-link" href="#testimonials">Testimonials</a>
+        <li>
+            <a class="main-nav-link" href="index.php">Home</a>
           </li>
-          <li><a class="main-nav-link" href="dashboard.html">Dashboard</a></li>
+          <li><a class="main-nav-link" href="imc.php">IMC</a></li>
+          <!-- <li><a class="main-nav-link" href="meals.php">Meals</a></li> -->
+        
+          <li><a class="main-nav-link" href="dashboard.php">Dashboard</a></li>
          
-          <li><a class="main-nav-link nav-cta" href="connexion.php">Try for free</a></li>
+          <li><a class="main-nav-link nav-cta" href="register.php">Try for free</a></li>
         </ul>
       </nav>
 

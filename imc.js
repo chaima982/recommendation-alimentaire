@@ -1,31 +1,35 @@
-document.getElementById('bmiForm').addEventListener('submit', function (e) {
+/* document.getElementById('bmiForm').addEventListener('submit', function (e) {
   e.preventDefault();
+
   const height = parseFloat(document.getElementById('height').value);
   const weight = parseFloat(document.getElementById('weight').value);
-  const bmi = weight / (height * height);
-  const resultBox = document.getElementById('resultBox');
-  const bmiValue = document.getElementById('bmiValue');
-  const status = document.getElementById('status');
-  const advice = document.getElementById('advice');
 
-  bmiValue.textContent = bmi.toFixed(2);
+  fetch('save-imc.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({ height, weight })
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      const bmi = data.bmi;
+      const status = data.status;
+      let advice = "";
 
-  let diagnosis = '';
-  let tips = '';
+      if (bmi < 18.5) {
+        advice = "Essayez des repas riches en protéines et graisses saines.";
+      } else if (bmi < 25) {
+        advice = "Maintenez une alimentation équilibrée.";
+      } else {
+        advice = "Réduisez les sucres et graisses, buvez beaucoup d’eau.";
+      }
 
-  if (bmi < 18.5) {
-    diagnosis = 'Underweight';
-    tips = 'Try meals rich in protein, healthy fats, and more frequent meals.';
-  } else if (bmi >= 18.5 && bmi <= 24.9) {
-    diagnosis = 'Normal';
-    tips = 'Maintain your balanced diet and stay active!';
-  } else {
-    diagnosis = 'Overweight / Obese';
-    tips = 'Eat more vegetables, reduce sugar and fats, and drink plenty of water.';
-  }
-
-  status.textContent = diagnosis;
-  advice.innerHTML = `<p><strong>Advice:</strong> ${tips}</p>`;
-
-  resultBox.style.display = 'block';
-});
+      document.getElementById('bmiValue').textContent = bmi;
+      document.getElementById('status').textContent = status;
+      document.getElementById('advice').innerHTML = `<p><strong>Conseil :</strong> ${advice}</p>`;
+      document.getElementById('resultBox').style.display = 'block';
+    } else {
+      alert("Erreur : " + (data.error || "Calcul impossible."));
+    }
+  });
+}); */

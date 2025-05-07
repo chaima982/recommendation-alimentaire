@@ -1,61 +1,21 @@
 <?php
 session_start();
+include 'db.php';
 
-$dsn = "mysql:host=localhost;dbname=recommendation;charset=utf8";
-$user = "root";
-$pass = "";
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email = $_POST['email'];
+    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
 
-try {
-    $pdo = new PDO($dsn, $user, $pass);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $stmt = $pdo->prepare("INSERT INTO users (email, password) VALUES (?, ?)");
+    $stmt->execute([$email, $password]);
 
-    if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['register'])) {
+    // Auto-login après inscription (facultatif)
+    $_SESSION['user_id'] = $pdo->lastInsertId();
 
-  
-        if (!empty($_POST['firstname']) && !empty($_POST['lastname']) && !empty($_POST['email']) && !empty($_POST['password'])) {
-
-            $firstname = htmlspecialchars(trim($_POST['firstname']));
-            $lastname = htmlspecialchars(trim($_POST['lastname']));
-            $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
-            $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-
-            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $_SESSION['error'] = "Email invalide.";
-                header("Location: register.php");
-                exit();
-            }
-
-            $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ?");
-            $stmt->execute([$email]);
-
-            if ($stmt->rowCount() > 0) {
-                $_SESSION['error'] = "Cet e-mail est déjà utilisé.";
-                header("Location: register.php");
-                exit();
-            }
-
-            // Insertion
-            $stmt = $pdo->prepare("INSERT INTO users (firstname, lastname, email, password) VALUES (?, ?, ?, ?)");
-            $stmt->execute([$firstname, $lastname, $email, $password]);
-
-            $_SESSION['success'] = "Inscription réussie !";
-            header("Location: connexion.html");
-            exit();
-
-        } else {
-            $_SESSION['error'] = "Tous les champs sont requis.";
-            header("Location: register.php");
-            exit();
-        }
-    }
-
-} catch (PDOException $e) {
-    $_SESSION['error'] = "Erreur de connexion : " . $e->getMessage();
-    header("Location: register.php");
+    header("Location: dashboard.php");
     exit();
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -64,6 +24,7 @@ try {
     <title>Sign Up</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="register.css">
+    <link rel="stylesheet" href="save_imc.php">
 
 </head>
 <body>

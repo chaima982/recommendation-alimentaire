@@ -2,7 +2,7 @@
 session_start();
 include 'db.php';
 
-if (isset($_POST['login'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
@@ -15,7 +15,7 @@ if (isset($_POST['login'])) {
         header("Location: dashboard.php");
         exit();
     } else {
-        $error = "Invalid credentials!";
+        echo "Email ou mot de passe incorrect";
     }
 }
 ?>
@@ -27,6 +27,7 @@ if (isset($_POST['login'])) {
     <title>Connexion</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="cnx.css">
+    <link rel="stylesheet" href="save_imc.php">
 </head>
 <body>
 <?php  

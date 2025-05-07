@@ -1,0 +1,63 @@
+
+  h1 {
+    text-align: center;
+    color: #2a9d8f;
+    margin-bottom: 20px;
+  }
+  
+  .calories-info {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 30px;
+  }
+  
+  .recipes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+  }
+  
+  .card {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.08);
+    text-align: center;
+  }
+  
+  .card img {
+    width: 100%;
+    height: 170px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  .card h2 {
+    color: #333;
+    font-size: 28px;
+    margin: 15px 0 10px;
+  }
+  
+  .card p {
+    font-size: 15px;
+    color: #555;
+  }
+  
+  .pagination {
+    text-align: center;
+    margin-top: 30px;
+  }
+  
+  .pagination a {
+    margin: 0 8px;
+    text-decoration: none;
+    color: #2a9d8f;
+    font-weight: bold;
+  }
+  
+  .pagination a.active {
+    color: #fff;
+    background: #2a9d8f;
+    padding: 6px 12px;
+    border-radius: 5px;
+  }
+  
