@@ -54,7 +54,16 @@
           <li><a class="main-nav-link" href="imc.php">IMC</a></li>
           <!-- <li><a class="main-nav-link" href="meals.php">Meals</a></li> -->
         
-          <li><a class="main-nav-link" href="dashboard.php">Dashboard</a></li>
+          <?php if (isset($_SESSION['user_id'])): ?>
+    <?php if ($_SESSION['user_id'] == 1): ?>
+        <!-- Admin -->
+        <li><a class="main-nav-link" href="admindashboard.php">Dashboard</a></li>
+    <?php else: ?>
+        <!-- Client -->
+        <li><a class="main-nav-link" href="dashboard.php">Dashboard</a></li>
+    <?php endif; ?>
+<?php endif; ?>
+
          
           <li><a class="main-nav-link nav-cta" href="register.php">Try for free</a></li>
         </ul>

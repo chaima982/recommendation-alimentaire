@@ -1,60 +1,27 @@
 <?php
 session_start();
-if (!isset($_SESSION['user_id'])) {
-    header("Location: connexion.php");
-    exit();
-}
+require 'db.php';
 include 'header.php';
-
-
+$type = 'thin';
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-
-
-$recipes = [
-    [
-        "title" => "Smoothie Banane & Beurre de Cacahuète",
-        "desc" => "Riche en protéines et en graisses saines.",
-        "img" => "img/22.png",
-        "calories" => 450
-    ],
-    [
-        "title" => "Porridge Avoine & Fruits Secs",
-        "desc" => "Parfait pour un petit-déjeuner énergétique.",
-        "img" => "img/21.png",
-        "calories" => 500
-    ],
-    [
-        "title" => "Bol de Riz, Poulet & Avocat",
-        "desc" => "Riche en protéines et en bons lipides.",
-        "img" => "img/23.png",
-        "calories" => 650
-    ],
-    [
-        "title" => "Pâtes Carbonara Maison",
-        "desc" => "Plat riche et savoureux pour le déjeuner.",
-        "img" => "img/24.png",
-        "calories" => 700
-    ],
-    [
-        "title" => "Omelette aux Fromages & Légumes",
-        "desc" => "Parfait pour un dîner riche en énergie.",
-        "img" => "img/25.png",
-        "calories" => 550
-    ],
-    [
-        "title" => "Toast Beurre & Miel",
-        "desc" => "Snack rapide à haute densité calorique.",
-        "img" => "img/20.png",
-        "calories" => 350
-    ],
-  
-];
-
-// Pagination
 $perPage = 6;
-$totalPages = ceil(count($recipes) / $perPage);
+
+// Compter le nombre total de recettes
+$stmt = $pdo->prepare("SELECT COUNT(*) FROM recettes WHERE type = ?");
+$stmt->execute([$type]);
+$totalRecipes = $stmt->fetchColumn();
+
+// Calcul de pagination
+$totalPages = ceil($totalRecipes / $perPage);
 $start = ($page - 1) * $perPage;
-$currentRecipes = array_slice($recipes, $start, $perPage);
+
+// Récupération des recettes paginées
+$stmt = $pdo->prepare("SELECT * FROM recettes WHERE type = ? LIMIT ?, ?");
+$stmt->bindValue(1, $type);
+$stmt->bindValue(2, $start, PDO::PARAM_INT);
+$stmt->bindValue(3, $perPage, PDO::PARAM_INT);
+$stmt->execute();
+$recipes = $stmt->fetchAll();
 ?>
 
 <!DOCTYPE html>
@@ -71,11 +38,11 @@ $currentRecipes = array_slice($recipes, $start, $perPage);
   <p class="calories-info">Besoins caloriques recommandés : <strong>2500 - 3000 kcal/jour</strong></p>
 
   <div class="recipes-grid">
-    <?php foreach ($currentRecipes as $recipe): ?>
+    <?php foreach ($recipes as $recipe): ?>
       <div class="card">
-        <img src="<?= $recipe['img'] ?>" alt="<?= $recipe['title'] ?>" />
-        <h2><?= $recipe['title'] ?></h2>
-        <p><?= $recipe['desc'] ?></p>
+        <img src="<?= $recipe['image'] ?>" alt="<?= htmlspecialchars($recipe['title']) ?>" />
+        <h2><?= htmlspecialchars($recipe['title']) ?></h2>
+        <p><?= htmlspecialchars($recipe['description']) ?></p>
         <p><strong>Calories : <?= $recipe['calories'] ?> kcal</strong></p>
       </div>
     <?php endforeach; ?>

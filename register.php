@@ -5,17 +5,24 @@ include 'db.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
     $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+    $role = 'client'; 
 
-    $stmt = $pdo->prepare("INSERT INTO users (email, password) VALUES (?, ?)");
-    $stmt->execute([$email, $password]);
+    $stmt = $pdo->prepare("INSERT INTO users (email, password, role) VALUES (?, ?, ?)");
+    $stmt->execute([$email, $password, $role]);
 
-    // Auto-login après inscription (facultatif)
     $_SESSION['user_id'] = $pdo->lastInsertId();
+    $_SESSION['role'] = $role;
 
-    header("Location: dashboard.php");
+    if ($role === 'admin') {
+        header("Location: connexion.php");
+    } else {
+        header("Location: connexion.php");
+    }
     exit();
 }
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

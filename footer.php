@@ -66,7 +66,7 @@
             </ul>
   
             <p class="copyright">
-              Made with ❤️ by METTA SURENDHAR
+              Made with ❤️
             </p>
           </div>
   
@@ -74,10 +74,10 @@
             <p class="footer-heading">Contact us</p>
             <address class="contacts">
               <p class="address">
-                No 623, Ambedkar St., 4th Floor, Chennai, TamilNadu
+                Tunis
               </p>
               <p>
-                <a class="footer-link" href="tel:415-201-6370">+91 52525 35353</a
+                <a class="footer-link" href="tel:415-201-6370">+216 25 353 3</a
                 ><br />
                 <a class="footer-link" href="mailto:hello@healthybite.com"
                   >healthybite@gmail.com</a
@@ -99,7 +99,7 @@
           <nav class="nav-col">
             <p class="footer-heading">Company</p>
             <ul class="footer-nav">
-              <li><a class="footer-link" href="#">About Omnifood</a></li>
+              <li><a class="footer-link" href="#">About food</a></li>
               <li><a class="footer-link" href="#">For Business</a></li>
               <li><a class="footer-link" href="#">Cooking partners</a></li>
               <li><a class="footer-link" href="#">Careers</a></li>

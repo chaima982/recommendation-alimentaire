@@ -1,24 +1,36 @@
 <?php
 session_start();
-include 'db.php';
+include 'db.php'; // Assure-toi que ce fichier contient bien la connexion PDO à la base
+
+$error = "";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = $_POST['email'];
+    $email = trim($_POST['email']);
     $password = $_POST['password'];
 
-    $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ?");
+    // Recherche de l'utilisateur dans la base
+    $stmt = $pdo->prepare("SELECT id, password, role FROM users WHERE email = ?");
     $stmt->execute([$email]);
-    $user = $stmt->fetch();
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($user && password_verify($password, $user['password'])) {
+        // Connexion réussie
         $_SESSION['user_id'] = $user['id'];
-        header("Location: dashboard.php");
+        $_SESSION['role'] = $user['role'];
+
+        // Redirection selon le rôle
+        if ($user['role'] === 'admin') {
+            header("Location: admindashboard.php");
+        } else {
+            header("Location: dashboard.php");
+        }
         exit();
     } else {
-        echo "Email ou mot de passe incorrect";
+        $error = "Email ou mot de passe incorrect.";
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -46,8 +58,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 
                 <!-- Boutons de connexion avec Facebook et Google -->
                 <div class="social-login d-flex justify-content-center gap-3 mb-3">
-                    <button class="btn btn-primary w-50">Facebook</button>
-                    <button class="btn btn-danger w-50">Google</button>
+                <a href="https://www.facebook.com/" target="_blank" class="btn btn-primary w-50">Facebook</a>
+
+                <button onclick="window.open('https://mail.google.com/', '_blank')" class="btn btn-danger w-50">Gmail</button>
+
                 </div>
 
                 <p class="text-center" style="font-size:28px;padding:60px">Or sign in with your email</p>
@@ -63,7 +77,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </form>
 
                 <div class="text-center mt-3" style="padding:20px">
-                    <a href="#"  style="font-size:28px;">Forgot password ?</a>
+                <a href="forgot-password.php" style="font-size:28px;">Forgot password ?</a>
+
                     <br>
                     <br>
 
